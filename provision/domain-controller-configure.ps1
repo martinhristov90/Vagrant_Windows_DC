@@ -73,11 +73,8 @@ Set-ADUser `
     -PasswordNeverExpires $true
 
 
-# add the sonar-administrators group.
-# NB this is used by https://github.com/rgl/sonarqube-windows-vagrant.
 
-
-# add John Doe.
+# add vlt user.
 $name = 'vlt'
 New-ADUser `
     -Path $usersAdPath `
@@ -87,18 +84,14 @@ New-ADUser `
     -AccountPassword $password `
     -Enabled $true `
     -PasswordNeverExpires $true
-# we can also set properties.
-Set-ADUser `
-    -Identity "CN=$name,$usersAdPath" `
-    -HomePage "https://$domain/~$name"
+
 # add user to the Domain Admins group.
 Add-ADGroupMember `
     -Identity 'Domain Admins' `
     -Members "CN=$name,$usersAdPath"
 
 
-
-# add Jane Doe.
+# add Martin.
 $name = 'Martin'
 New-ADUser `
     -Path $usersAdPath `
@@ -113,12 +106,12 @@ New-ADUser `
     -PasswordNeverExpires $true
 
 
-echo 'john.doe Group Membership'
+echo 'Martin Group Membership'
 Get-ADPrincipalGroupMembership -Identity 'Martin' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 
-echo 'jane.doe Group Membership'
+echo 'vlt Group Membership'
 Get-ADPrincipalGroupMembership -Identity 'vlt' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
