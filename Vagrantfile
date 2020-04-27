@@ -22,10 +22,10 @@ Vagrant.configure("2") do |config|
     config.vm.network :private_network, ip: $domain_ip_address
 
 
-    #config.vm.network "forwarded_port", host: 33389, guest: 3389 #RDP
-    #config.vm.network "forwarded_port", host: 389, guest: 389 #LDAP
-    #config.vm.network "forwarded_port", host: 636, guest: 636 #LDAPS
-    #config.vm.network "forwarded_port", host: 88, guest: 88 # Kerberos
+    config.vm.network "forwarded_port", host: 33389, guest: 3389 #RDP
+    config.vm.network "forwarded_port", host: 389, guest: 389 #LDAP
+    config.vm.network "forwarded_port", host: 636, guest: 636 #LDAPS
+    config.vm.network "forwarded_port", host: 88, guest: 88 # Kerberos
 
 
         # Configure VirtualBox
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", path: "provision/domain-controller-configure.ps1"
     config.vm.provision "shell", reboot: true
     config.vm.provision "shell", path: "provision/base.ps1", args: [$timezone]
-    #config.vm.provision "shell", path: "provision/ps.ps1", args: "ad-explorer.ps1"
+    config.vm.provision "shell", path: "provision/ad-explorer.ps1"
 
 
 end

@@ -14,7 +14,7 @@ $adDomain = Get-ADDomain
 $domain = $adDomain.DNSRoot
 $domainDn = $adDomain.DistinguishedName
 $usersAdPath = "CN=Users,$domainDn"
-$password = ConvertTo-SecureString -AsPlainText 'HeyH0Password' -Force
+$password = ConvertTo-SecureString -AsPlainText '96x%sFQ' -Force
 
 
 # remove the non-routable vagrant nat ip address from dns.
